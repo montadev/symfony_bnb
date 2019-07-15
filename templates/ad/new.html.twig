@@ -1,0 +1,18 @@
+{% extends 'base.html.twig'%}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}
+   Creation d'une annonce
+ {% endblock %}
+
+ {% block body %}
+   
+   <div class="container">
+     <h1>Creation d'une annonce</h1>
+
+      {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+       
+       {{form_widget(form)}}
+
+      {{form_end(form)}}
+   </div>
+ {% endblock %}
