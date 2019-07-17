@@ -1,15 +1,12 @@
+
 {% extends 'base.html.twig'%}
 
-{% block title %}
-   Creation d'une annonce
- {% endblock %}
-
+{% block title%}Edition d'une annonce{%endblock%}
  {% form_theme form 'ad/_collection.html.twig' %}
+{% block body %}
 
- {% block body %}
-   
-   <div class="container">
-     <h1>Creation d'une annonce</h1>
+  <div class="container">
+     <h1>Modifier l'annonce : {{ad.title}}</h1>
 
       {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
        
@@ -20,18 +17,13 @@
             
       {{form_end(form)}}
    </div>
- {% endblock %}
 
- 
+{% endblock %}
+
+
 
   {% block javascripts %}
   
     <script src="/js/ad.js"></script>
   
   {% endblock %}
-
-
-
-  
-
- 
