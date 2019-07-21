@@ -62,19 +62,22 @@
 
             <div class="col">
                <div class="row">
-                  <div class="col-4">
-                  <img src="http://placehold.it/64x64" alt="Avatar ">
+                  <div class="col-3">
+                  <a href="{{path('user_show',{'slug':ad.author.slug})}}">
+                  <img src="{{ad.author.picture}}" class="avatar avatar-medium" alt="Avatar de {{ad.author.firstName}}">
+                  </a>
                   </div>
 
                     <div class="col">
-                    <h3>Hermi Montassar </h3>
-                    <span class="badge badge-primary">3 annonces</span>
+                    <a href="{{path('user_show',{'slug':ad.author.slug})}}">
+                    <h3>{{ad.author.firstName}} {{ad.author.lastName}}</h3>
+                    </a>
+                    <span class="badge badge-primary">{{ad.author.ads | length }} annonces</span>
                     </div>
                </div>
 
                <p>
-               Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
-               Lorem Lorem Lorem Lorem Lorem Lorem Lorem v Lorem 
+               {{ad.author.description | raw }}
                </p>
             </div>
       </div>
