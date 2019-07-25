@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookingType extends AbstractType
@@ -14,22 +15,25 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startDate',DateType::class,[
+            ->add('startDate',TextType::class,[
                 'label'=>'Date d\'arrivée',
-                'widget' => 'single_text',
+                
                 'attr'=>[
-                    'placeholder'=>'La date a laquelle vous comptez arrivez'
+                    'placeholder'=>'La date a laquelle vous comptez arrivez',
+                     'autocomplete'=>'off'
                 ]
             ])
-            ->add('endTime',DateType::class,[
+            ->add('endTime',TextType::class,[
                 'label'=>'Date de départ',
-                'widget' => 'single_text',
+               
                 'attr'=>[
-                    'placeholder'=>'La date a laquelle vous quittez les lieux'
+                    'placeholder'=>'La date a laquelle vous quittez les lieux',
+                    'autocomplete'=>'off'
                 ]
             ])
             ->add('comment',TextareaType::class,[
                 'label'=>false,
+                'required'=>false,
                 'attr'=>[
                     'placeholder'=>'Si vous avez un commentaire,n\'hesitez pas à en faire part !'
                 ]

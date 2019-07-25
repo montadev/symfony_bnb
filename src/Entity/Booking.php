@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -30,11 +32,13 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message="Attention la date doit etre au bonne format")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message="Attention la date doit etre au bonne format")
      */
     private $endTime;
 
@@ -53,6 +57,72 @@ class Booking
      */
     private $comment;
 
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+
+    public function prePersist()
+    {
+        if(empty($this->createAt))
+        {
+           $this->createAt=new \DateTime();
+        }
+
+        if(empty($this->amount))
+        {
+             $this->amount=$this->ad->getPrice() * $this->getDuration();
+        }
+    }
+    public function isBookableDates()
+    {
+        //1 if faut connaitre les dates qui sont impossible pour annonce
+
+        $notAvailableDays=$this->ad->notAvailableDays();
+        //2 il faut comparer les dates choisies avec les dates impossible
+        $bookingDays=$this->getDays();
+
+        //transform bookingDays to array contain string
+
+        $days=array_map(function($day){
+
+            return $day->format('Y-m-d');
+        },$bookingDays);
+
+        //transform notAvailableDays to array contain string
+
+        $notAvailable=array_map(function($day){
+
+            return $day->format('Y-m-d');
+        },$notAvailableDays);
+
+        foreach ($days as $day) {
+            
+            if(array_search($day,$notAvailable)!==false) return false; 
+        }
+
+        return true;
+    }
+
+    public function getDays(){
+
+        $result=range($this->startDate->getTimestamp(),
+        $this->endTime->getTimestamp(),
+        24*60*60);
+
+        $days=array_map(function($days){
+
+        return new \DateTime(date('Y-m-d',$days));
+        },$result);
+
+        return $days;
+    }
+   public function getDuration()
+    {
+       $diff= $this->endTime->diff($this->startDate);
+
+        return  $diff->days;
+    }
     public function getId(): ?int
     {
         return $this->id;

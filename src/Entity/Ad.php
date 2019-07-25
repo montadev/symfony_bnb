@@ -102,6 +102,29 @@ class Ad
             $this->slug=$slugify->slugify($this->title);
         }
     }
+
+    public function notAvailableDays()
+    {
+        $notAvailableDays=[];
+        foreach ($this->bookings as $booking) {
+            //les jours entre date d'arrivé et depart
+            $resultat=range(
+               
+                $booking->getStartDate()->getTimestamp(),
+                $booking->getEndTime()->getTimestamp(),
+                24 * 60 * 60
+            );
+
+            $days=array_map(function($dayTimestamp){
+
+                return new \DateTime(date('Y-m-d',$dayTimestamp));
+            },$resultat);
+
+            $notAvailableDays=array_merge($notAvailableDays,$days);
+        }
+
+        return $notAvailableDays;
+    }
     public function getId(): ?int
     {
         return $this->id;
