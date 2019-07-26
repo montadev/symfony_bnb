@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -143,6 +144,29 @@ class Ad
         if(count($this->comments)) return $sum/count($this->comments);
 
         return 0;
+    }
+
+    public function getCommentFromAuthor(User $author)
+    {
+       
+      foreach ($this->comments as $comment) 
+      {
+        
+          if($comment->getAuthor()===$author)
+          {
+             return $comment;
+
+             
+
+             
+          }
+
+         
+
+          return null;
+      }
+
+      
     }
     public function getId(): ?int
     {

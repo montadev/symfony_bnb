@@ -17,6 +17,19 @@
     
      <div class="col-lg-4">
      <img src="{{booking.ad.coverImage}}" alt="imag" class="img-fluid">
+
+      <div class="mt-3">
+
+      {% set comment= booking.ad.getCommentFromAuthor(app.user) %}
+
+      {% if comment is not null %}
+         <strong>Noté donnée : </strong>
+         {% include 'partials/rating.html.twig' with {'rating':comment.rating} %}
+      {% else %}
+        Vous n'avez pas encore donné de note.
+      {% endif %}
+      
+      </div>
      </div>
 
      <div class="col-lg-8">
