@@ -25,6 +25,7 @@ class BookingType extends AbstractType
         $builder
             ->add('startDate',TextType::class,[
                 'label'=>'Date d\'arrivée',
+                'invalid_message' => 'Vous devez fournir une date valide!(exmple:31/07/2019)',
                 
                 'attr'=>[
                     'placeholder'=>'La date a laquelle vous comptez arrivez',
@@ -33,6 +34,7 @@ class BookingType extends AbstractType
             ])
             ->add('endTime',TextType::class,[
                 'label'=>'Date de départ',
+                'invalid_message' => 'Vous devez fournir une date valide!(exmple:31/07/2019)',
                
                 'attr'=>[
                     'placeholder'=>'La date a laquelle vous quittez les lieux',
