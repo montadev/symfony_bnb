@@ -44,3 +44,7 @@ div.carousel-caption
     color:red !important;
     
 }
+
+span.rating i{
+    color:goldenrod;
+}
