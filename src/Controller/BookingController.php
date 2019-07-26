@@ -12,6 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class BookingController extends AbstractController
 {
@@ -67,7 +68,7 @@ class BookingController extends AbstractController
     }
   /**
    * @Route("booking/{id}",name="booking_show")
-   *
+   * @Security("is_granted('ROLE_USER') and user===booking.getBooker()")
    */
     public function show(Booking $booking,Request $request,ObjectManager $manager)
     {

@@ -5,7 +5,7 @@
 {% block body %}
 
   <div class="container">
-       <h1>Votre réservation (n°{{ booking.getId() }})</h1>
+       <h1 class="my-5">Votre réservation (n°{{ booking.getId() }})</h1>
 
        {% if app.request.query.get('withAlert') %}
 
@@ -55,7 +55,7 @@
            <dt class="col-md-8" >{{booking.duration}}</dt>
            <dt class="col-md-4" >Montant Total</dt>
 
-           <dt class="col-md-8" >{{booking.amount}} &euro;</dt>
+           <dt class="col-md-8" >{{booking.amount | number_format(2,',',' ')}} DT</dt>
            <dt class="col-md-4" >Commentaire</dt>
            <dt class="col-md-8" >{{booking.comment | default('Aucun commentaire')}}</dt>
 

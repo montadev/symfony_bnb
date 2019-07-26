@@ -9,13 +9,39 @@
  {% block body %}
    
    <div class="container">
-     <h1>Creation d'une annonce</h1>
+     <h1 class="my-5">Creation d'une annonce</h1>
 
       {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
        
-       {{form_widget(form)}}
+      
          
-         
+        <div class="row">
+        
+        <div class="col">
+           <div class="alert alert-light">
+             <h2>Informations Génerales</h2>
+             <hr>
+             {{form_row(form.title)}}
+             {{form_row(form.slug)}}
+             {{form_row(form.price)}}
+             {{form_row(form.rooms)}}
+           </div>
+           <div class="alert alert-light">
+            <h2>Details de l'annonce</h2>
+            <hr>
+            {{form_row(form.introduction)}}
+            {{form_row(form.content)}}
+           </div>
+        </div>
+        <div class="col">
+        <div class="alert alert-light">
+           <h2>Image de l'annonce</h2>
+           <hr>
+           {{form_row(form.coverImage)}}
+           {{form_row(form.images)}}
+        </div>
+        </div>
+        </div> 
 
             
       {{form_end(form)}}
