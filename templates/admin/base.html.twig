@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="/css/bootsrap.min.css">
+          <link rel="stylesheet" href="/css/app.css">
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+            
+
+        {% include 'admin/partials/header.html.twig' %}
+
+
+                {% block body %}{% endblock %}
+
+        {% include 'admin/partials/footer.html.twig' %}
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/poper.min.js"></script>
+        <script src="/js/bootsrap.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

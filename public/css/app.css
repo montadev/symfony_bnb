@@ -56,6 +56,11 @@ span.rating i{
     color:goldenrod;
 }
 
+.avatar-micro{
+
+    max-width: 20px;
+    max-height: 20px;
+}
 .alert a{
     text-decoration: none;
 }

@@ -1,0 +1,161 @@
+{% extends 'admin/base.html.twig' %}
+{% form_theme form _self %}
+{% block title %}Modification de l'annonce numero {{ad.id}} {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1>Modification de l'annonce {{ad.title}}</h1>
+
+    {{form_start(form)}}
+
+     <div class="row">
+      <div class="col-lg">
+      <div class="card bg-light">
+        <div class="card-header">
+        <h4 class="card-title">Corriger l'annonce ?</h4>
+        </div>
+        <div class="card-body">
+           {{form_widget(form)}}
+        </div>
+      </div>
+
+      </div>
+      <div class="col-lg">
+
+         <div class="card bg-light">
+        <div class="card-header">
+        <h4 class="card-title">Les Réservations  :</h4>
+        </div>
+        <div class="card-body">
+           <table class="table">
+              <thead>
+               <tr>
+                  <th>Id</th>
+                  <th>Voyageur</th>
+                  <th>Date de réservation</th>
+                  <th></th>
+               </tr>
+              </thead>
+              <tbody>
+              {% for booking in ad.bookings %}
+               <tr>
+                  <td>{{booking.id}}</td>
+                  <td>{{booking.booker.firstName}} {{booking.booker.lastName}}</td>
+                  <td>{{booking.createAt | date('d/m/Y H:i')}}</td>
+                  <td>
+                  <a href="#" class="btn btn-primary">
+                   <i class="fas fa-pen"></i>
+                  </a>
+                  </td>
+               </tr>
+
+               {% endfor %}
+              </tbody>
+           </table>
+        </div>
+
+    <div class="card bg-light mt-5">
+        <div class="card-header">
+        <h4 class="card-title">Les Commentaires  :</h4>
+        </div>
+        <div class="card-body">
+           <table class="table">
+              <thead>
+               <tr>
+                  <th>Id</th>
+                  <th>Voyageur</th>
+                  <th>Note</th>
+                  <th>Commentaires</th>
+                  <th></th>
+               </tr>
+              </thead>
+              <tbody>
+              {% for comment in ad.comments %}
+               <tr>
+                  <td>{{comment.id}}</td>
+                  <td>{{comment.author.firstName}} {{comment.author.lastName}}</td>
+                  <td>{{comment.rating}}</td>
+                  <td>{{comment.content}}</td>
+                  <td>
+                  <a href="#" class="btn btn-primary">
+                   <i class="fas fa-pen"></i>
+                  </a>
+                  </td>
+               </tr>
+
+               {% endfor %}
+              </tbody>
+           </table>
+        </div>
+
+      </div>
+      
+
+
+      </div>
+
+     </div>
+    
+
+    {{form_end(form)}}
+  </div>
+{% endblock %}
+
+{% block _annonce_images_widget %}
+   {{form_widget(form)}}
+{% endblock %}
+
+{% block _annonce_images_entry_row %}
+
+     
+   <div id="block_{{id}}">
+   {{form_widget(form)}}
+
+   </div>
+{% endblock %}
+
+{% block _annonce_images_entry_widget %}
+   <div class="row align-items-center">
+   <div class="row">
+   <div class="col-4">
+        {% if value %}
+            <img src="{{value.url}}" class="img-fluid">
+
+          {% endif %}  
+       </div>     
+    </div>
+     <div class="col-4">
+     
+      {{form_row(form.url)}}
+     </div>
+      <div class="col-6">
+      {{form_row(form.caption)}}
+      </div>
+
+      <div class="col">
+        <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">
+         <i class="fas fa-trash"></i>
+        </button>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+ 
+   <script>
+     
+        $(document).ready(function(){
+
+        $('[data-action="delete"]').on('click',function(){
+
+          
+          const target=this.dataset.target;
+
+           $(target).remove();
+
+          });
+
+        });
+
+   </script>
+{% endblock %}

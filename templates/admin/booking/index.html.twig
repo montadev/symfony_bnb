@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administartions des annonces{% endblock %}
+
+{% block body %}
+
+  <div class="container-fluid">
+    <h2 class="my-5">Gestion des Reservations </h1>
+
+    <table class="table table-hover">
+      <thead>
+       <tr>
+         <th>Id</th>
+         <th>Date</th>
+         <th>Auteur</th>
+         <th class="text-center">Annonce</th>
+        
+         <th>Actions</th>
+       </tr>
+      </thead>
+
+      <tbody>
+      {% for booking in bookings  %}
+       <tr>
+       
+         <th>{{booking.id}}</th>
+         <th>{{booking.createAt | date('d/m/Y H:i')}}</th>
+         <th>
+         <img src="{{booking.booker.picture}}" alt="" class="avatar avatar-micro mr-2">
+         {{booking.booker.firstName}} {{booking.booker.lastName}}
+         </th>
+
+         <th class="text-center">
+
+         {{booking.ad.title}}
+         
+         </th>
+        
+         
+
+         
+         <th>
+         <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+         <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+         </th>
+       
+       </tr>
+       {% endfor %}
+      </tbody>
+
+    </table>
+
+  </div>
+{% endblock %}
