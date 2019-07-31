@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Booking;
 use App\Form\AdminBookingType;
 use App\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -22,6 +24,7 @@ class AdminBookingController extends AbstractController
             'bookings' => $repo->findAll(),
         ]);
     }
+
     /**
      * @Route("/admin/bookings/{id}/edit", name="admin_booking_edit")
      */
@@ -67,4 +70,5 @@ class AdminBookingController extends AbstractController
 
       return $this->redirectToRoute('admin_booking');
     }
+
 }
