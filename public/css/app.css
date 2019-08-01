@@ -18,7 +18,7 @@ div.ad-title .btn
    line-height: 1.5em;
 }
 
-div.container
+div.container,div.container-fluid
 {
     margin-top:20px;
 }
